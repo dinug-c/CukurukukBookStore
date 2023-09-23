@@ -1,6 +1,6 @@
 <?php
 $db_host='localhost';
-$db_database='cukurukuk';
+$db_database='cukurukuk_bookstore';
 $db_username='root';
 $db_password='';
 
