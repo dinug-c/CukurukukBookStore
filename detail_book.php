@@ -15,6 +15,15 @@ headerComponent("Detail ".$nama." - Cukurukuk BookStore");
 <p>Penulis : <?php echo $result['Author'] ?></p>
 <p>Harga : <?php echo $result['Price'] ?></p>
 
-<!-- <div>
-    <input type="text" name='masuk_komen' id="masuk_komen">
-</div> -->
+<!-- Tampilkan Review Buku -->
+<h2>Review Buku</h2>
+<?php
+$res = getSingleByQuery("reviews", "ISBN", $id);
+echo '<p>Review</p>';
+$i = 1;
+while ($row = $res->fetch_object()) {
+    echo '<p>'.$i.'. '. $row->review . '</p>';
+    echo '<hr>';
+    $i++;
+}
+?>
