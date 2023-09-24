@@ -51,6 +51,12 @@ function getSingleBy($table, $field, $value){
     }
 }
 
+function getSingleByQuery($table, $field, $value){
+    global $db;
+    $query = "SELECT * FROM $table WHERE $field = '$value'";
+    return $db->query($query);
+}
+
 function getSingleMultipleBy($table,$fields, $values){
     global $db;
     $set = array();

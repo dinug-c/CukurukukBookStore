@@ -2,7 +2,7 @@
 require_once("services/session.php");
 require_once("components/header.php");
 require_once("services/crud.php");
-userSession();
+adminSession();
 headerComponent("View Book - Cukurukuk BookStore");
 $result = getSingleOrderedJSON("buku", "ISBN")
 ?>
@@ -64,20 +64,20 @@ $result = getSingleOrderedJSON("buku", "ISBN")
             fillCategoryDropdown();
 
             function applyFilter() {
-    var minPrice = parseFloat(document.getElementById("minPrice").value);
-    var maxPrice = parseFloat(document.getElementById("maxPrice").value);
+                var minPrice = parseFloat(document.getElementById("minPrice").value);
+                var maxPrice = parseFloat(document.getElementById("maxPrice").value);
 
-    // Memfilter data sesuai dengan rentang harga yang dipilih
-    var filteredData = result.filter(function (item) {
-        return item.Price >= minPrice && item.Price <= maxPrice;
-    });
-
-    // Memperbarui tabel dengan data yang difilter
-    result = filteredData;
-    currentPage = 1; // Set halaman ke 1
-    fillTable();
-    createPagination();
-}
+                // Memfilter data sesuai dengan rentang harga yang dipilih
+                var filteredData = result.filter(function (item) {
+                    return item.Price >= minPrice && item.Price <= maxPrice;
+                });
+            
+                // Memperbarui tabel dengan data yang difilter
+                result = filteredData;
+                currentPage = 1; // Set halaman ke 1
+                fillTable();
+                createPagination();
+            }
 
             // Fungsi untuk mengisi tabel
             function fillTable() {
