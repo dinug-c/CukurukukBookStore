@@ -43,9 +43,13 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 <div class="alert alert-success" role="alert">
                     Pesanan Anda telah berhasil diproses. Terima kasih telah berbelanja!
                 </div>
+                <a class="btn btn-primary" href="home.php">Back To Home</a>
             </div>
         </div>
+        
     </div>
+
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>

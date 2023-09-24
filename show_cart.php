@@ -52,6 +52,8 @@ if ($id != '') {
     
                             $sum_qty = $sum_qty + $qty;
                             $sum_price = $sum_price + ($row->Price * $qty);
+                            $_SESSION['total_item'] = $sum_qty;
+                            $_SESSION['total_price'] = $sum_price;
                         }
                     }
                     echo '<tr><td></td><td></td><td></td><td></td><td></td><td>Rp ' . $sum_price . '</td>';
