@@ -92,6 +92,9 @@ function headerComponentBootstrap($title){
         }
         </style>
         <link href="/src/css/index.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+
         <script src="/src/js/index.js"></script>
     </head>
     <body>

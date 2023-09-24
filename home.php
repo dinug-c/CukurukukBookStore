@@ -7,7 +7,7 @@ headerComponent("Dashboard - Cukurukuk BookStore");
 $result = getSingleOrderedJSON("buku", "ISBN")
 ?>
 
-<div class="w-full h-full overflow-scroll py-10 mb-0  bg-[#5843BE] flex items-center justify-center">
+<div class="w-full h-full overflow-scroll py-10 mb-0 bg-[#5843BE] flex items-center justify-center">
     <div class="flex flex-col p-10 bg-white rounded-lg shadow-sm w-screen m-20">
         <div class="flex flex-row items-center">
             <div>
@@ -37,7 +37,7 @@ $result = getSingleOrderedJSON("buku", "ISBN")
             </div>
             <button onclick="applyFilter()" class="bg-yellow-400 text-sm py-2 my-auto font-semibold w-[100px] h-[50px] rounded-lg hover:shadow-lg hover:shadow-yellow-200 transition-all">Terapkan</button>
         </div>
-        <div class="flex flex-row flex-wrap justify-between gap-y-2" id="cardContainer">
+        <div class="mt-5 grid grid-rows-2 grid-flow-col justify-between gap-y-5" id="cardContainer">
                
         </div>
         <div id="pagination" class="flex flex-row gap-5 mt-5"></div> 
@@ -57,7 +57,7 @@ $result = getSingleOrderedJSON("buku", "ISBN")
         }
     }
 
-    var result = <?php echo $result; ?>;
+            var result = <?php echo $result; ?>;
             var itemsPerPage = 10; // Jumlah item per halaman
             var currentPage = 1;  // Halaman saat ini
 
@@ -150,8 +150,10 @@ $result = getSingleOrderedJSON("buku", "ISBN")
                         filterSelect === "author" && book.Author.toUpperCase().indexOf(input) > -1) &&
                         bookPrice >= minPrice && bookPrice <= maxPrice
                     ) {
-                        var cardDiv = fillCard(book);
-                        document.getElementById("cardContainer").appendChild(cardDiv);
+                        if (i >= startIndex && i < endIndex) {
+                            var cardDiv = fillCard(book);
+                            cardContainer.appendChild(cardDiv);
+                        }
                     }
                 }
             }

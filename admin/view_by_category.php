@@ -6,8 +6,9 @@ adminSession();
 headerComponentBootstrap("View Order - Cukurukuk BookStore");
 adminNav();
 ?>
+
 <div class="card m-5">
-    <div class="card-header">Customer Data</div>
+    <div class="card-header">Data Buku Per Kategori</div>
     <div class="card-body">
         <br>
         <table class="table table-striped">
@@ -48,7 +49,8 @@ adminNav();
                 echo '<td>' . $row->ISBN . '</td>';
                 echo '<td>' . $row->Title . '</td>';
                 echo '<td>' . $row->Author . '</td>';
-                echo '<td>' . $row->Price . '</td>';
+                // Ubah harga menjadi format IDR
+                echo '<td>Rp ' . number_format($row->Price, 0, ',', '.') . '</td>';
                 echo '</tr>';
             }
 
@@ -66,5 +68,10 @@ adminNav();
             $db->close();
             ?>
         </table>
+        
     </div>
 </div>
+
+<?php
+require_once("../components/footer.php");
+?>

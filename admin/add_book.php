@@ -4,6 +4,7 @@ require_once("../components/header.php");
 require_once("../services/crud.php");
 adminSession();
 headerComponentBootstrap("Add Book - Cukurukuk BookStore");
+$categories = getCategories();
 adminNav();
 if (!isset($_POST["submit"])) {
     // Tampilkan formulir untuk menambahkan buku
@@ -91,17 +92,24 @@ if (!isset($_POST["submit"])) {
             <div class="form-group">
                 <label for="category">Category</label>
                 <select class="form-control" id="category" name="category">
-                    <option value="Category 1" <?php if ($category === "Category 1") echo "selected"; ?>>Category 1</option>
-                    <option value="Category 2" <?php if ($category === "Category 2") echo "selected"; ?>>Category 2</option>
-                    <option value="Category 3" <?php if ($category === "Category 3") echo "selected"; ?>>Category 3</option>
-                    <option value="Category 4" <?php if ($category === "Category 4") echo "selected"; ?>>Category 4</option>
+                    <?php foreach ($categories as $cat) : ?>
+                        <option value="<?= $cat['namaKategori'] ?>" <?php if ($category === $cat['id']) echo "selected"; ?>>
+                            <?= $cat['namaKategori'] ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button>
+            <button type="submit" class="btn btn-primary" name="submit" onclick="return confirmDelete();" value="submit">Submit</button>
             <a href="view_book.php" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </div>
+<script>
+    function confirmDelete() {
+        return confirm("Apakah data sudah benar?");
+    }
+
+</script>
 <?php
 require_once("../components/footer.php");
 ?>

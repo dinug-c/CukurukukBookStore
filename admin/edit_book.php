@@ -4,6 +4,7 @@ require_once("../components/header.php");
 require_once("../services/crud.php");
 adminSession();
 headerComponentBootstrap("Edit Book - Cukurukuk BookStore");
+adminNav();
 $categories = getCategories();
 $id = (isset($_GET['id']) ? $_GET['id'] : '');
 $result = getSingleBy("buku", "ISBN", $id);
@@ -56,7 +57,7 @@ if (!isset($_POST["submit"])) {
     }
 }
 ?>
-<div class="card mt-4">
+<div class="card m-5">
     <div class="card-header">Edit Book Data</div>
     <div class="card-body">
         <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) . '?id=' . $id ?>" method="POST" autocomplete="on">

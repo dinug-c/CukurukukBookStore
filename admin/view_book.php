@@ -7,6 +7,12 @@ headerComponentBootstrap("View Book - Cukurukuk BookStore");
 adminNav();
 $result = getSingleOrderedJSON("buku", "ISBN")
 ?>
+<style>
+    select.form-select {
+        border: 1px solid #007bff; /* Warna border biru */
+        border-radius: 5px; /* Radius sudut 5px */
+    }
+</style>
 
 <div class="card m-5">
     <div class="card-header">Data Buku</div>
@@ -59,6 +65,11 @@ $result = getSingleOrderedJSON("buku", "ISBN")
             var result = <?php echo $result; ?>;
             var itemsPerPage = 10; // Jumlah item per halaman
             var currentPage = 1;  // Halaman saat ini
+
+            function confirmDelete() {
+        return confirm("Apakah Anda yakin ingin menghapus buku ini?");
+    }
+
 
             function fillCategoryDropdown() {
                 var categoryDropdown = document.getElementById("categoryFilter");
@@ -133,7 +144,7 @@ $result = getSingleOrderedJSON("buku", "ISBN")
                     cell3.innerHTML = book.Category;
                     cell4.innerHTML = book.Author;
                     cell5.innerHTML = formatter.format(book.Price);
-                    cell6.innerHTML = '<a class="btn btn-warning" href="edit_book.php?id=' + book.ISBN + '">Edit</a>  <a class="btn btn-danger" href="delete_book.php?id=' + book.ISBN + '">Delete Book</a>';
+                    cell6.innerHTML = '<a class="btn btn-warning" href="edit_book.php?id=' + book.ISBN + '">Edit</a>  <a onclick="return confirmDelete();" class="btn btn-danger" href="delete_book.php?id=' + book.ISBN + '">Delete Book</a>';
                 }
             }
         }
