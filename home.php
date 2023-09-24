@@ -12,7 +12,7 @@ $result = getSingleOrderedJSON("buku", "ISBN")
         <div class="flex flex-row items-center">
             <div>
                 <h1 class="text-3xl font-bold from-slate-800 text-transparent to-purple-900 bg-gradient-to-br bg-clip-text">Cukurukuk</h1>
-                <p>Dashboard</p>
+                <p>Hi Welcome</p>
             </div>
             <input class="h-[40px] w-2/4 bg-[#5843BE]/10 rounded-lg px-5 ml-10" type="text" id="searchInput" onkeyup="fillTable()" placeholder="Cari berdasarkan judul...">
             <select id="filterSelect" class="ml-3 p-2 text-[#5843BE] ring-1 ring-[#5843BE] rounded-lg" onchange="fillTable()">

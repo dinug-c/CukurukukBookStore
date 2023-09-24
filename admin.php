@@ -37,7 +37,7 @@ if(isset($_POST["submit"])){
             if($result->num_rows > 0){
                 $_SESSION['email'] = $email;
                 $_SESSION['category'] = "admin";
-                header('Location: dashboard.php');
+                header('Location: view_book.php');
             }else{
                 $error_toast = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-5 border-2 text-pink-400 rounded-md mb-2">
              

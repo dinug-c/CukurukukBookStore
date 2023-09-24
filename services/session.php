@@ -2,9 +2,9 @@
 function adminSession() {
     session_start();
     if(!isset($_SESSION['username'])){
-        header('Location: login.php');
+        header('Location: admin.php');
     }elseif($_SESSION['category'] != "admin"){
-        header('Location: index.php');
+        header('Location: dashboard.php');
     }
 }
 
