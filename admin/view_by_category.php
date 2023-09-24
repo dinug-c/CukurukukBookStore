@@ -9,7 +9,6 @@ headerComponent("View Order - Cukurukuk BookStore");
     <div class="card-header">Customer Data</div>
     <div class="card-body">
         <br>
-        <a class="btn btn-primary" href="add_customer.php">+ Add Customer Data</a><br/><br/>
         <table class="table table-striped">
             <tr>
                 <th>Category</th>
@@ -25,7 +24,6 @@ headerComponent("View Order - Cukurukuk BookStore");
             }
 
             $currentCategory = null;
-
             while ($row = $result->fetch_object()) {
                 // Jika kategori saat ini berbeda dari kategori sebelumnya, buat baris baru
                 if ($currentCategory !== $row->Category) {

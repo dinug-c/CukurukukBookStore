@@ -7,7 +7,7 @@ headerComponent("Dashboard - Cukurukuk BookStore");
 $result = getSingleOrderedJSON("buku", "ISBN")
 ?>
 
-<div class="w-full h-full overflow-scroll pt-20 bg-[#5843BE] flex items-center justify-center">
+<div class="w-full h-full overflow-scroll pt-48 bg-[#5843BE] flex items-center justify-center">
     <div class="flex flex-col p-10 bg-white rounded-lg shadow-sm w-screen m-20">
         <div class="flex flex-row items-center">
             <div>
@@ -26,7 +26,7 @@ $result = getSingleOrderedJSON("buku", "ISBN")
             </select>   
             <button class="ml-3 p-2 text-[#5843BE] ring-1 ring-[#5843BE] rounded-lg hover:bg-[#5843BE] hover:text-white transition-all" onclick=showHarga()>Harga</button>
         </div>
-        <div class="filter-container flex-row mt-5 hidden" id="range-harga">
+        <div class="filter-container flex-row hidden mt-3" id="range-harga">
             <div class="flex flex-col">
                 <label for="minPrice">Harga Minimum</label>
                 <input class="border-[1.5px] border-gray-200 w-full py-2 px-5 rounded-md my-2 focus:outline-none focus:border-transparent focus:ring-[1.5px] focus:ring-[#5843BE]" type="number" id="minPrice" min="0" step="1">
@@ -35,7 +35,7 @@ $result = getSingleOrderedJSON("buku", "ISBN")
                 <label for="maxPrice">Harga Maksimum</label>
                 <input class="border-[1.5px] border-gray-200 w-full py-2 px-5 rounded-md my-2 focus:outline-none focus:border-transparent focus:ring-[1.5px] focus:ring-[#5843BE]"  type="number" id="maxPrice" min="0" step="1">
             </div>
-            <button onclick="applyFilter()" class="bg-yellow-400 px-4 text-sm py-2 my-auto font-semibold w-[100px] h-[50px] rounded-lg ml-5 hover:shadow-lg hover:shadow-yellow-200 transition-all">Terapkan</button>
+            <button onclick="applyFilter()" class="bg-yellow-400 text-sm py-2 my-auto font-semibold w-[100px] h-[50px] rounded-lg hover:shadow-lg hover:shadow-yellow-200 transition-all">Terapkan</button>
         </div>
         <div class="flex flex-row flex-wrap justify-between gap-y-2" id="cardContainer">
                
@@ -91,10 +91,10 @@ $result = getSingleOrderedJSON("buku", "ISBN")
 
             function fillCard(book) {
                 var cardDiv = document.createElement("div");
-                cardDiv.className = "w-[200px] h-fit py-10 px-5 bg-white rounded-lg shadow-md";
+                cardDiv.className = "w-[220px] h-fit py-5 px-3 bg-white rounded-lg shadow-md";
                 
                 var title = document.createElement("a");
-                title.className = "text-sm";
+                title.className = "text-sm no-underline";
                 title.href = "detail_book.php?id=" + book.ISBN;
                 title.textContent = book.Title;
                 

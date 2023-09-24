@@ -9,7 +9,7 @@ if(isset($_POST["submit"])){
     $valid = true;
     $username = test_input($_POST['username']);
     if($username == ''){
-        $error_username = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-5 border-2 text-pink-400 rounded-md mb-3">
+        $error_username = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-3 border-2 text-pink-400 rounded-md mb-3">
              
         <p>Username si required</p>
         </div>';
@@ -17,19 +17,19 @@ if(isset($_POST["submit"])){
     }
     $email = test_input($_POST['email']);
     if($email == ''){
-        $error_email = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-5 border-2 text-pink-400 rounded-md mb-3">
+        $error_email = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-3 border-2 text-pink-400 rounded-md mb-3">
              
         <p>Email si required</p>
         </div>';
         $valid = false;
     }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-        $error_email = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-5 border-2 text-pink-400 rounded-md mb-3">
+        $error_email = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-3 border-2 text-pink-400 rounded-md mb-3">
              
         <p>Invalid email format</p>
         </div>';
         $valid = false;
     } elseif(getSingleBy("akun", "Email", $email)){
-        $error_email = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-5 border-2 text-pink-400 rounded-md mb-3">
+        $error_email = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-3 border-2 text-pink-400 rounded-md mb-3">
              
         <p>❌ Email already registered</p>
         </div>';
@@ -37,7 +37,7 @@ if(isset($_POST["submit"])){
     }
     $password = test_input($_POST['password']);
     if($password == ''){
-        $error_password = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-5 border-2 text-pink-400 rounded-md mb-3">
+        $error_password = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-3 border-2 text-pink-400 rounded-md mb-3">
              
         <p>Password si required</p>
         </div>';
@@ -45,14 +45,14 @@ if(isset($_POST["submit"])){
     }
     $confirm = test_input($_POST['confirm']);
     if($confirm == ''){
-        $error_confirm = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-5 border-2 text-pink-400 rounded-md mb-3">
+        $error_confirm = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-3 border-2 text-pink-400 rounded-md mb-3">
              
         <p>Confirmation password si required</p>
         </div>';
         $valid = false;
     }
     elseif($password != $confirm){
-        $error_confirm = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-5 border-2 text-pink-400 rounded-md mb-3">
+        $error_confirm = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-3 border-2 text-pink-400 rounded-md mb-3">
              
         <p>Password and confirmation password must be same</p>
         </div>';
@@ -68,8 +68,7 @@ if(isset($_POST["submit"])){
         if(!$result){
             die("Could not query the database: <br/>".$db->error."<br/>Query: ".$query);
         }else{
-            $_SESSION['email'] = $email;
-            $_SESSION['category'] = "customer";
+            $_SESSION['customer'] = $email;
             header('Location: home.php');
         }
         $db->close();
@@ -86,22 +85,22 @@ if(isset($_POST["submit"])){
             <form class="mt-5" method="POST" autocomplete="on" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <div class="form-group">
                 <label for="username" >Username</label></br>
-                <input type="text" class="border-[1.5px] border-gray-200 w-full py-2 px-5 rounded-md my-2 focus:outline-none focus:border-transparent focus:ring-[1.5px] focus:ring-[#5843BE]" id="username" placeholder="Hermoine Granger" size="30" name="username" value="<?php if(isset($username)) echo $username; ?>">
+                <input type="text" class="border-[1.5px] border-gray-200 w-full py-2 px-3 rounded-md my-2 focus:outline-none focus:border-transparent focus:ring-[1.5px] focus:ring-[#5843BE]" id="username" placeholder="Hermoine Granger" size="30" name="username" value="<?php if(isset($username)) echo $username; ?>">
                 <span class="error"><?php if(isset($error_username)) echo $error_username; ?></span>
             </div>
             <div class="form-group">
                 <label for="email" >Email</label></br>
-                <input type="email" class="border-[1.5px] border-gray-200 w-full py-2 px-5 rounded-md my-2 focus:outline-none focus:border-transparent focus:ring-[1.5px] focus:ring-[#5843BE]" id="email" placeholder="example@gmail.com" size="30" name="email" value="<?php if(isset($email)) echo $email; ?>">
+                <input type="email" class="border-[1.5px] border-gray-200 w-full py-2 px-3 rounded-md my-2 focus:outline-none focus:border-transparent focus:ring-[1.5px] focus:ring-[#5843BE]" id="email" placeholder="example@gmail.com" size="30" name="email" value="<?php if(isset($email)) echo $email; ?>">
                 <span class="error"><?php if(isset($error_email)) echo $error_email; ?></span>
             </div>
             <div class="form-group">
                 <label for="password">Password</label></br>
-                <input type="password" class="border-[1.5px] border-gray-200 w-full py-2 px-5 rounded-md my-2 focus:outline-none focus:border-transparent focus:ring-[1.5px] focus:ring-[#5843BE]" id="password" placeholder="Enter password" name="password" value="">
+                <input type="password" class="border-[1.5px] border-gray-200 w-full py-2 px-3 rounded-md my-2 focus:outline-none focus:border-transparent focus:ring-[1.5px] focus:ring-[#5843BE]" id="password" placeholder="Enter password" name="password" value="">
                 <span class="error"><?php if(isset($error_password)) echo $error_password; ?></span>
             </div>
             <div class="form-group">
                 <label for="confirm">Password Confirmation</label></br>
-                <input type="password" class="border-[1.5px] border-gray-200 w-full py-2 px-5 rounded-md my-2 focus:outline-none focus:border-transparent focus:ring-[1.5px] focus:ring-[#5843BE]" id="confirm" placeholder="Enter password confirmation" name="confirm" value="">
+                <input type="password" class="border-[1.5px] border-gray-200 w-full py-2 px-3 rounded-md my-2 focus:outline-none focus:border-transparent focus:ring-[1.5px] focus:ring-[#5843BE]" id="confirm" placeholder="Enter password confirmation" name="confirm" value="">
                 <span class="error"><?php if(isset($error_confirm)) echo $error_confirm; ?></span>
             </div>
            <?php if(isset($error_toast)) echo $error_toast; ?>

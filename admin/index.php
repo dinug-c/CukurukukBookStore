@@ -9,13 +9,13 @@ if(isset($_POST["submit"])){
     $valid = true;
     $email = test_input($_POST['email']);
     if($email == ''){
-        $error_email = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-5 border-2 text-pink-400 rounded-md mb-3">
+        $error_email = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-3 border-2 text-pink-400 rounded-md mb-3">
              
         <p>Email si required</p>
         </div>';
         $valid = false;
     }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-        $error_email = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-5 border-2 text-pink-400 rounded-md mb-3">
+        $error_email = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-3 border-2 text-pink-400 rounded-md mb-3">
              
         <p>Invalid email format</p>
         </div>';
@@ -23,7 +23,7 @@ if(isset($_POST["submit"])){
     }
     $password = test_input($_POST['password']);
     if($password == ''){
-        $error_password = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-5 border-2 text-pink-400 rounded-md mb-3">
+        $error_password = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-3 border-2 text-pink-400 rounded-md mb-3">
              
         <p>Password si required</p>
         </div>';
@@ -39,7 +39,7 @@ if(isset($_POST["submit"])){
                 
                 header('Location: view_book.php');
             }else{
-                $error_toast = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-5 border-2 text-pink-400 rounded-md mb-2">
+                $error_toast = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-3 border-2 text-pink-400 rounded-md mb-2">
              
                 <p>❌ Email or Password Invalid</p>
                 </div>';
@@ -59,12 +59,12 @@ if(isset($_POST["submit"])){
             <form class="mt-5" method="POST" autocomplete="on" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <div class="form-group">
                 <label for="email" >Email</label></br>
-                <input type="email" class="border-[1.5px] border-gray-200 w-full py-2 px-5 rounded-md my-2 focus:outline-none focus:border-transparent focus:ring-[1.5px] focus:ring-[#5843BE]" id="email" placeholder="example@gmail.com" size="30" name="email" value="<?php if(isset($email)) echo $email; ?>">
+                <input type="email" class="border-[1.5px] border-gray-200 w-full py-2 px-3 rounded-md my-2 focus:outline-none focus:border-transparent focus:ring-[1.5px] focus:ring-[#5843BE]" id="email" placeholder="example@gmail.com" size="30" name="email" value="<?php if(isset($email)) echo $email; ?>">
                 <span class="error"><?php if(isset($error_email)) echo $error_email; ?></span>
             </div>
             <div class="form-group">
                 <label for="password">Password</label></br>
-                <input type="password" class="border-[1.5px] border-gray-200 w-full py-2 px-5 rounded-md my-2 focus:outline-none focus:border-transparent focus:ring-[1.5px] focus:ring-[#5843BE]" id="password" placeholder="Enter password" name="password" value="">
+                <input type="password" class="border-[1.5px] border-gray-200 w-full py-2 px-3 rounded-md my-2 focus:outline-none focus:border-transparent focus:ring-[1.5px] focus:ring-[#5843BE]" id="password" placeholder="Enter password" name="password" value="">
                 <span class="error"><?php if(isset($error_password)) echo $error_password; ?></span>
             </div>
            <?php if(isset($error_toast)) echo $error_toast; ?>

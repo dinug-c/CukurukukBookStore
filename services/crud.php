@@ -120,9 +120,9 @@ function updateSingle($table, $id, $data){
         return false;
     }
 }
-function deleteSingle($table, $id){
+function deleteSingle($table,$field, $id){
     global $db;
-    $query = "DELETE FROM $table WHERE id = $id";
+    $query = "DELETE FROM $table WHERE $field = $id";
     $result = $db->query($query);
     if($result){
         return true;

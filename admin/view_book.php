@@ -8,7 +8,6 @@ $result = getSingleOrderedJSON("buku", "ISBN")
 ?>
 <div class="card mt-5">
     <div class="card-header">Data Buku</div>
-    
     <div class="card-body">
         <input type="text" id="searchInput" onkeyup="fillTable()" placeholder="Cari berdasarkan judul...">
         <select id="filterSelect" onchange="fillTable()">
