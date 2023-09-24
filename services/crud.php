@@ -24,6 +24,12 @@ function getSingle($table, $id){
     }
 }
 
+function getSingleNoSpicy($table){
+    global $db;
+    $query = "SELECT * FROM $table ORDER BY Category";
+    return $db->query($query);
+}
+
 function getSingleOrdered($table, $order){
     global $db;
     $query = "SELECT * FROM $table ORDER BY $order";
@@ -55,6 +61,17 @@ function getSingleByQuery($table, $field, $value){
     global $db;
     $query = "SELECT * FROM $table WHERE $field = '$value'";
     return $db->query($query);
+}
+
+function getCountField($table, $field){
+    global $db;
+    $query = "SELECT $field FROM $table";
+    $result = $db->query($query);
+    if($result){
+        return $result->fetch_assoc();
+    }else{
+        return false;
+    }
 }
 
 function getSingleMultipleBy($table,$fields, $values){
