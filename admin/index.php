@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once("components/header.php");
-require_once("services/db.php");
-require_once("services/crud.php");
+require_once("../components/header.php");
+require_once("../services/db.php");
+require_once("../services/crud.php");
 headerComponent("Admin Login - Cukurukuk BookStore");
 
 if(isset($_POST["submit"])){
@@ -35,8 +35,8 @@ if(isset($_POST["submit"])){
             die("Could not query the database: <br/>".$db->error."<br/>Query: ".$query);
         }else{
             if($result->num_rows > 0){
-                $_SESSION['email'] = $email;
-                $_SESSION['category'] = "admin";
+                $_SESSION['admin'] = $email;
+                
                 header('Location: view_book.php');
             }else{
                 $error_toast = '<div class="bg-pink-100 text-sm border-pink-400 py-2 px-5 border-2 text-pink-400 rounded-md mb-2">
@@ -75,5 +75,5 @@ if(isset($_POST["submit"])){
         </div>
     </div>
 <?php
-require_once("components/footer.php");
+require_once("../components/footer.php");
 ?>

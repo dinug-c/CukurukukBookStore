@@ -1,8 +1,8 @@
 <?php
-require_once("services/session.php");
-require_once("components/header.php");
-require_once("services/crud.php");
-userSession();
+require_once("../services/session.php");
+require_once("../components/header.php");
+require_once("../services/crud.php");
+adminSession();
 headerComponent("View Book - Cukurukuk BookStore");
 $result = getSingleOrderedJSON("buku", "ISBN")
 ?>
@@ -120,7 +120,7 @@ $result = getSingleOrderedJSON("buku", "ISBN")
                     var cell6 = row.insertCell(5);
 
                     cell1.innerHTML = book.ISBN;
-                    cell2.innerHTML = book.Title;
+                    cell2.innerHTML = '<a href="detail_book.php?id=' + book.ISBN + '">' + book.Title + '</a>';
                     cell3.innerHTML = book.Category;
                     cell4.innerHTML = book.Author;
                     cell5.innerHTML = formatter.format(book.Price);
@@ -150,12 +150,12 @@ $result = getSingleOrderedJSON("buku", "ISBN")
                 }
             }
 
-            // Memanggil fungsi untuk mengisi tabel dan membuat pagination
+
             fillTable();
             createPagination();
         </script>
     </div>
 </div>
 <?php
-require_once("components/footer.php");
+require_once("../components/footer.php");
 ?>

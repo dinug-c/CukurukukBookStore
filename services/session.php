@@ -1,19 +1,23 @@
 <?php
 function adminSession() {
     session_start();
-    if(!isset($_SESSION['username'])){
-        header('Location: admin.php');
-    }elseif($_SESSION['category'] != "admin"){
-        header('Location: dashboard.php');
+    if(!$_SESSION['admin']){
+        header('Location: index.php');
     }
 }
 
 function userSession(){
     session_start();
-    if(!isset($_SESSION['username'])){
+    if(!$_SESSION['user']){
         header('Location: login.php');
-    }elseif($_SESSION['category'] != "customer"){
-        header('Location: index.php');
+    }
+}
+
+function bothSession(){
+    session_start();
+    if(!$_SESSION['user'] && !$_SESSION['admin']){
+        header('Location: login.php');
     }
 }
 ?>
+
