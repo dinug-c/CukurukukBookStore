@@ -24,6 +24,21 @@ function getSingle($table, $id){
     }
 }
 
+function getAll($table){
+    global $db;
+    $query = "SELECT * FROM $table";
+    $result = $db->query($query);
+    if($result){
+        $data = array();
+        while($row = $result->fetch_assoc()){
+            $data[] = $row;
+        }
+        return $data;
+    }else{
+        return false;
+    }
+}
+
 function getSingleNoSpicy($table){
     global $db;
     $query = "SELECT * FROM $table ORDER BY Category";
@@ -141,4 +156,65 @@ function deleteList($table, $ids){
         return false;
     }
 }
+
+function getCategories() {
+    global $db; // Pastikan variabel $db telah didefinisikan sebelumnya
+
+    $query = "SELECT id, namaKategori FROM kategori"; // Gantilah "kategori" dengan nama tabel kategori yang sesuai di database Anda
+    $result = $db->query($query);
+
+    if (!$result) {
+        die("Could not query the database: <br/>" . $db->error . "<br/>Query: " . $query);
+    }
+
+    $categories = array();
+    while ($row = $result->fetch_assoc()) {
+        $categories[] = $row;
+    }
+
+    return $categories;
+}
+
+function getCountByCategory() {
+    global $db; // Variabel koneksi database yang Anda gunakan
+
+    $query = "SELECT Category, COUNT(*) AS Count FROM buku GROUP BY Category";
+    $result = $db->query($query);
+
+    $categoryCounts = array();
+
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $categoryCounts[] = $row;
+        }
+        $result->free();
+    }
+
+    return $categoryCounts;
+}
+
+// Fungsi untuk mengambil penjualan buku berdasarkan kategori dari tabel penjualan
+function getSalesByCategory() {
+    global $db; // Variabel koneksi database yang Anda gunakan
+
+    $query = "SELECT kategori.namaKategori AS CategoryName, penjualan.jumlah AS TotalSales
+              FROM penjualan
+              JOIN kategori ON penjualan.kategoriId = kategori.id
+              GROUP BY kategori.namaKategori";
+
+    $result = $db->query($query);
+
+    $salesByCategory = array();
+
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $salesByCategory[] = $row;
+        }
+        $result->free();
+    }
+
+    return $salesByCategory;
+}
+
+
 ?>

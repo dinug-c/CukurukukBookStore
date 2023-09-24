@@ -3,9 +3,10 @@ require_once("../services/session.php");
 require_once("../components/header.php");
 require_once("../services/crud.php");
 adminSession();
-headerComponent("View Order - Cukurukuk BookStore");
+headerComponentBootstrap("View Order - Cukurukuk BookStore");
+adminNav();
 ?>
-<div class="card">
+<div class="card m-5">
     <div class="card-header">Customer Data</div>
     <div class="card-body">
         <br>
@@ -25,10 +26,17 @@ headerComponent("View Order - Cukurukuk BookStore");
 
             $currentCategory = null;
             while ($row = $result->fetch_object()) {
-                // Jika kategori saat ini berbeda dari kategori sebelumnya, buat baris baru
+                // Jika kategori saat ini berbeda dari kategori sebelumnya, buat baris baru dengan <span>
                 if ($currentCategory !== $row->Category) {
+                    // Jika ini bukan baris pertama, tutup baris sebelumnya
+                    if ($currentCategory !== null) {
+                        echo '</td>';
+                        echo '<td></td>';
+                        echo '</tr>';
+                    }
+
                     echo '<tr>';
-                    echo '<td>' . $row->Category . '</td>';
+                    echo '<td><span>' . $row->Category . '</span></td>';
                     $currentCategory = $row->Category;
                 } else {
                     // Ini adalah baris tambahan dengan kategori yang sama, jadi tidak perlu menampilkan kategori lagi
@@ -41,6 +49,13 @@ headerComponent("View Order - Cukurukuk BookStore");
                 echo '<td>' . $row->Title . '</td>';
                 echo '<td>' . $row->Author . '</td>';
                 echo '<td>' . $row->Price . '</td>';
+                echo '</tr>';
+            }
+
+            // Tutup baris terakhir jika ada
+            if ($currentCategory !== null) {
+                echo '</td>';
+                echo '<td></td>';
                 echo '</tr>';
             }
 

@@ -3,7 +3,7 @@ require_once("../services/session.php");
 require_once("../components/header.php");
 require_once("../services/crud.php");
 adminSession();
-headerComponent("Delete Book - Cukurukuk BookStore");
+headerComponentBootstrap("Delete Book - Cukurukuk BookStore");
 $id = (isset($_GET['id']) ? $_GET['id'] : '');
 if ($id != '') {
     $result = deleteSingle("buku", "ISBN", $id);

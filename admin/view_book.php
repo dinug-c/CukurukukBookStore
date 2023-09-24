@@ -3,30 +3,36 @@ require_once("../services/session.php");
 require_once("../components/header.php");
 require_once("../services/crud.php");
 adminSession();
-headerComponent("View Book - Cukurukuk BookStore");
+headerComponentBootstrap("View Book - Cukurukuk BookStore");
+adminNav();
 $result = getSingleOrderedJSON("buku", "ISBN")
 ?>
-<div class="card mt-5">
+
+<div class="card m-5">
     <div class="card-header">Data Buku</div>
     <div class="card-body">
-        <input type="text" id="searchInput" onkeyup="fillTable()" placeholder="Cari berdasarkan judul...">
-        <select id="filterSelect" onchange="fillTable()">
-            <option value="title">Title</option>
-            <option value="isbn">ISBN</option>
-            <option value="author">Author</option>
-        </select>
-        </br>
-        <select id="categoryFilter" onchange="fillTable()">
-            <option value="all">Semua Kategori</option>
-            <!-- Isi pilihan kategori dari data buku -->
-        </select>
-        <div class="filter-container">
-            <label for="minPrice">Harga Minimum:</label>
-            <input type="number" id="minPrice" min="0" step="1">
-            <label for="maxPrice">Harga Maksimum:</label>
-            <input type="number" id="maxPrice" min="0" step="1">
-            <button onclick="applyFilter()">Terapkan</button>
+        <div class="input-group mb-3">
+            <input type="text" id="searchInput" onkeyup="fillTable()" class="form-control" placeholder="Cari berdasarkan judul...">
+            <select id="filterSelect" onchange="fillTable()" class="form-select">
+                <option value="title">Title</option>
+                <option value="isbn">ISBN</option>
+                <option value="author">Author</option>
+            </select>
         </div>
+        <div class="mb-3">
+            <select id="categoryFilter" onchange="fillTable()" class="form-select">
+                <option value="all">Semua Kategori</option>
+                <!-- Isi pilihan kategori dari data buku -->
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Harga Minimum</span>
+            <input type="number" id="minPrice" min="0" step="1" class="form-control">
+            <span class="input-group-text">Harga Maksimum</span>
+            <input type="number" id="maxPrice" min="0" step="1" class="form-control">
+            <button onclick="applyFilter()" class="btn btn-primary">Terapkan</button>
+        </div>
+        <a class="btn btn-primary mb-3" href="add_book.php">+ Add Book</a>
         <table id="dataTable" class="table table-striped">
             <thead>
             <tr>
@@ -44,7 +50,11 @@ $result = getSingleOrderedJSON("buku", "ISBN")
             
             </tfoot>
         </table>
-        <div id="pagination"></div> 
+        <nav>
+            <ul class="pagination justify-content-center" id="pagination"></ul>
+        </nav>
+    </div>
+</div>
         <script>
             var result = <?php echo $result; ?>;
             var itemsPerPage = 10; // Jumlah item per halaman
@@ -123,7 +133,7 @@ $result = getSingleOrderedJSON("buku", "ISBN")
                     cell3.innerHTML = book.Category;
                     cell4.innerHTML = book.Author;
                     cell5.innerHTML = formatter.format(book.Price);
-                    cell6.innerHTML = '<a href="edit_book.php?id=' + book.ISBN + '">Edit</a> | <a href="delete_book.php?id=' + book.ISBN + '">Delete Book</a>';
+                    cell6.innerHTML = '<a class="btn btn-warning" href="edit_book.php?id=' + book.ISBN + '">Edit</a>  <a class="btn btn-danger" href="delete_book.php?id=' + book.ISBN + '">Delete Book</a>';
                 }
             }
         }

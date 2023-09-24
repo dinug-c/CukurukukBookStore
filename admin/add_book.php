@@ -3,26 +3,30 @@ require_once("../services/session.php");
 require_once("../components/header.php");
 require_once("../services/crud.php");
 adminSession();
-headerComponentBootstrap("Edit Book - Cukurukuk BookStore");
-$categories = getCategories();
-$id = (isset($_GET['id']) ? $_GET['id'] : '');
-$result = getSingleBy("buku", "ISBN", $id);
-
+headerComponentBootstrap("Add Book - Cukurukuk BookStore");
+adminNav();
 if (!isset($_POST["submit"])) {
-    // Tampilkan formulir untuk mengedit data buku
-    $isbn = $result['ISBN'];
-    $title = $result['Title'];
-    $author = $result['Author'];
-    $price = $result['Price'];
-    $category = $result['Category'];
+    // Tampilkan formulir untuk menambahkan buku
+    $isbn = "";
+    $title = "";
+    $author = "";
+    $price = "";
+    $category = "";
 } else {
     $valid = true;
 
     // Ambil data dari formulir
+    $isbn = test_input($_POST['isbn']);
     $title = test_input($_POST['title']);
     $author = test_input($_POST['author']);
     $price = test_input($_POST['price']);
     $category = $_POST['category'];
+
+    // Validasi terhadap field ISBN
+    if (empty($isbn)) {
+        $error_isbn = "ISBN is required";
+        $valid = false;
+    }
 
     // Validasi terhadap field title
     if (empty($title)) {
@@ -42,27 +46,32 @@ if (!isset($_POST["submit"])) {
         $valid = false;
     }
 
-    // Jika valid, update data buku ke database
+    // Jika valid, tambahkan data buku ke database
     if ($valid) {
-        $query = "UPDATE buku SET Title = '$title', Author = '$author', Price = '$price', Category = '$category' WHERE ISBN = '$id'";
-        $result = $db->query($query);
+        $bookData = [
+            'ISBN' => $isbn,
+            'Title' => $title,
+            'Author' => $author,
+            'Price' => $price,
+            'Category' => $category
+        ];
 
-        if (!$result) {
-            die("Could not query the database: <br/>" . $db->error . "<br/>Query: " . $query);
-        } else {
-            $db->close();
+        if (createSingle("buku", $bookData)) {
             header('Location: view_book.php');
+        } else {
+            echo "Failed to add the book to the database.";
         }
     }
 }
 ?>
-<div class="card mt-4">
-    <div class="card-header">Edit Book Data</div>
+<div class="card m-5">
+    <div class="card-header">Add Book</div>
     <div class="card-body">
-        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) . '?id=' . $id ?>" method="POST" autocomplete="on">
+        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" autocomplete="on">
             <div class="form-group">
                 <label for="isbn">ISBN</label>
-                <input disabled type="text" class="form-control" id="isbn" name="isbn" value="<?= $isbn; ?>">
+                <input type="text" class="form-control" id="isbn" name="isbn" value="<?= $isbn; ?>">
+                <div class="error"><?php if (isset($error_isbn)) echo $error_isbn ?></div>
             </div>
             <div class="form-group">
                 <label for="title">Title</label>
@@ -82,11 +91,10 @@ if (!isset($_POST["submit"])) {
             <div class="form-group">
                 <label for="category">Category</label>
                 <select class="form-control" id="category" name="category">
-                    <?php foreach ($categories as $cat) : ?>
-                        <option value="<?= $cat['namaKategori'] ?>" <?php if ($category === $cat['id']) echo "selected"; ?>>
-                            <?= $cat['namaKategori'] ?>
-                        </option>
-                    <?php endforeach; ?>
+                    <option value="Category 1" <?php if ($category === "Category 1") echo "selected"; ?>>Category 1</option>
+                    <option value="Category 2" <?php if ($category === "Category 2") echo "selected"; ?>>Category 2</option>
+                    <option value="Category 3" <?php if ($category === "Category 3") echo "selected"; ?>>Category 3</option>
+                    <option value="Category 4" <?php if ($category === "Category 4") echo "selected"; ?>>Category 4</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button>
@@ -94,3 +102,6 @@ if (!isset($_POST["submit"])) {
         </form>
     </div>
 </div>
+<?php
+require_once("../components/footer.php");
+?>

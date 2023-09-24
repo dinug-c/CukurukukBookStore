@@ -7,14 +7,14 @@ headerComponent("Dashboard - Cukurukuk BookStore");
 $result = getSingleOrderedJSON("buku", "ISBN")
 ?>
 
-<div class="w-full h-full overflow-scroll pt-48 bg-[#5843BE] flex items-center justify-center">
+<div class="w-full h-full overflow-scroll py-10 mb-0  bg-[#5843BE] flex items-center justify-center">
     <div class="flex flex-col p-10 bg-white rounded-lg shadow-sm w-screen m-20">
         <div class="flex flex-row items-center">
             <div>
                 <h1 class="text-3xl font-bold from-slate-800 text-transparent to-purple-900 bg-gradient-to-br bg-clip-text">Cukurukuk</h1>
                 <p>Hi Welcome</p>
             </div>
-            <input class="h-[40px] w-2/4 bg-[#5843BE]/10 rounded-lg px-5 ml-10" type="text" id="searchInput" onkeyup="fillTable()" placeholder="Cari berdasarkan judul...">
+            <input class="h-[40px] w-2/4 bg-[#5843BE]/10 rounded-lg px-3 ml-10" type="text" id="searchInput" onkeyup="fillTable()" placeholder="Cari berdasarkan judul...">
             <select id="filterSelect" class="ml-3 p-2 text-[#5843BE] ring-1 ring-[#5843BE] rounded-lg" onchange="fillTable()">
                 <option value="title">Title</option>
                 <option value="isbn">ISBN</option>
